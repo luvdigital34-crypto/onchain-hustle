@@ -1,0 +1,592 @@
+{
+  "chat_ids": [],
+  "tracked_wallets": [
+    {
+      "address": "6tRZkbqwy99hWuExk8TnKYpUHHcQ6jb4FjnNwjh4RkHY",
+      "label": "🧱 Keanu"
+    },
+    {
+      "address": "AQREi4dGVk9X4cuckX87pwnsrFtgdDSkfSoRfCaUtqYP",
+      "label": "🎈 Villain"
+    },
+    {
+      "address": "7aX1VDjtkUvhTB3nCLWkvMjoG6Ngh7zoF7vywJYHMqy2",
+      "label": "🎈 Villain"
+    },
+    {
+      "address": "5sNnKuWKUtZkdC1eFNyqz3XHpNoCRQ1D1DfHcNHMV7gn",
+      "label": "🎈 Villain"
+    },
+    {
+      "address": "Dk4na3gi8HYrrnFDcRgVfET23Ltm7AxbzvPpGyHaXwQJ",
+      "label": "🚗 Uber"
+    },
+    {
+      "address": "4V91ZLynwdwXh9rAP8iF1LCqoQ5j4ShyZSpt6jHwo1bm",
+      "label": "💰 rookiexbt"
+    },
+    {
+      "address": "3wwG9EwbAg3HP6DPsbvBn9up9NBWptKw1hey415veLDy",
+      "label": "⚽ Trax"
+    },
+    {
+      "address": "FrZv6bv1wriaY2mUusjWzkvqye9N4wnCgMiGyELHfrpB",
+      "label": "🐟 solcrow side"
+    },
+    {
+      "address": "BXxDbhVdkmNJPqBo2Y9CiMokb5tyeAuA1bAbfBdGgz4N",
+      "label": "🥝 ethan side"
+    },
+    {
+      "address": "ALJ1h9wX5AcLajcjtWMrm9sHQxLdaLATDDJhdumdDD1g",
+      "label": "🇰🇷 Korean"
+    },
+    {
+      "address": "2chiHDTdMSWCeodHSvXcUa2JV8jG6pLjDBBwBuhMheoK",
+      "label": "💵 Shadow"
+    },
+    {
+      "address": "5t9xBNuDdGTGpjaPTx6hKd7sdRJbvtKS8Mhq6qVbo8Qz",
+      "label": "🐯 Smokez"
+    },
+    {
+      "address": "Ez2jp3rwXUbaTx7XwiHGaWVgTPFdzJoSg8TopqbxfaJN",
+      "label": "🧱 Keanu"
+    },
+    {
+      "address": "domyBHx7zVCpGokDc8DGmY8fsTZeQnh2CEmKCPBSoSp",
+      "label": "🛸 Domy"
+    },
+    {
+      "address": "PMJA8UQDyWTFw2Smhyp9jGA6aTaP7jKHR7BPudrgyYN",
+      "label": "🔒 Chester"
+    },
+    {
+      "address": "99UtKhdi1RfmMGRpi7kbWz6AQ2y4JkFmxC3swMVMDioZ",
+      "label": "🐃 Cented brother"
+    },
+    {
+      "address": "CjGPYbLwqtmMxxPrAuykPnp3yx6RQ5eVLkuKuts22StW",
+      "label": "🐝 Henn"
+    },
+    {
+      "address": "3uz65G8e463MA5FxcSu1rTUyWRtrRLRZYskKtEHHj7qn",
+      "label": "🍆 Felix"
+    },
+    {
+      "address": "EdNcBDUFQaTxuaaiFfp5Ss4EanvuXtpGV9ZZvFFVRayd",
+      "label": "💸 CRIMEDEV"
+    },
+    {
+      "address": "AkKHWpsHwV4cXJFhAKWpBPHQ4D6WXiGqE1cs6EEbtwoA",
+      "label": "☁️ Cloux"
+    },
+    {
+      "address": "5pJnVxfEbfTfVYpbmzkqqcdPcrgajPhYmWbyMN3oAhiH",
+      "label": "☁️ Cloux"
+    },
+    {
+      "address": "5y6YKcKuW8L9AJY4nwRaqKCkkzRSM1YeHe4yTgUyVn5q",
+      "label": "☁️ Cloux"
+    },
+    {
+      "address": "93Pv48eMdMWhk2Yh3nVj99eUdXbpYsdhZSY3fKmN7hKH",
+      "label": "☁️ Cloux"
+    },
+    {
+      "address": "6DtEe9Rx388h7b9S76fBs6oHa2bPHK1WTUL2kntu3BYx",
+      "label": "☁️ Cloux"
+    },
+    {
+      "address": "6KYRAAqAcQYRZC1CXFN8sgXwUKkgxWVBQXdbd66KPKjm",
+      "label": "☁️ Cloux"
+    },
+    {
+      "address": "7frp7WPNx41n1pjnjkxnRhA4rKce4gSPWSVo4XkdafZw",
+      "label": "☁️ Cloux"
+    },
+    {
+      "address": "4Bue9skoaoUaTWtRHFAugjrMhs6Q3M6qs42bo62yagqk",
+      "label": "☁️ Cloux"
+    },
+    {
+      "address": "2M4yyYC5qV9DEHovHG8VpaymZgJZwxiAw6W58ujwqBk9",
+      "label": "☁️ Cloux"
+    },
+    {
+      "address": "4UURRSjrwTptc2Dib7MdTbbuksHzzu8CLVWEdavH2hnf",
+      "label": "☁️ Cloux"
+    },
+    {
+      "address": "7fDj9ZVJo1c9jAqpSGqnE6NKxjw5T3Qq5qJfuvRvQL6k",
+      "label": "☁️ Cloux"
+    },
+    {
+      "address": "FrzQhBRqKFxVJdBrFhpk1p1LZFQC2Jj11DHmoyP6peov",
+      "label": "☁️ Cloux"
+    },
+    {
+      "address": "9CwbTvgKfQkfzpxcvsN1oDG1WoRc7vyDvRoZnPh1WK6X",
+      "label": "☁️ Cloux"
+    },
+    {
+      "address": "GAsNrqoJiqk6jsBY9mGLMhnARiwEDJqnaJeXhAcx2fBY",
+      "label": "☁️ Cloux"
+    },
+    {
+      "address": "5TaPtQ9DE1YMUfiyLv7CCNx1CEh88nWx3sPmNRz9zL75",
+      "label": "☁️ Cloux"
+    },
+    {
+      "address": "DFYKCyfFnX8h4FerwPnpUFvT1AZrAisXEUCN8zKVGsct",
+      "label": "⚽ TRAX"
+    },
+    {
+      "address": "2quzLQqUUTZZQf5FF5cFX1zpjvjcXsHpGxn41njWPBVs",
+      "label": "⌛ dust"
+    },
+    {
+      "address": "nPs53aXzaBRhnqvvJEMvJQFJ7rsjxfSQXKWmdhmQtm5",
+      "label": "💸 NylaDev"
+    },
+    {
+      "address": "Cnpz7ow5PE3FxAu19aa98G5YP4u5UQ4noHpU9oZNMWdr",
+      "label": "simpleb"
+    },
+    {
+      "address": "FDV7kPFhYUsJwXhrNsMDd35EdBAfR72rf1fkBqgaNEEj",
+      "label": "🀄 Rayan"
+    },
+    {
+      "address": "CEoJPnnCfYisckyJnqZLeefc559KeheVsFLbpfDuTPWo",
+      "label": "🦬 Cented side"
+    },
+    {
+      "address": "H31vEBxSJk1nQdUN11qZgZyhScyShhscKhvhZZU3dQoU",
+      "label": "✡️ Megga"
+    },
+    {
+      "address": "GpTXmkdvrTajqkzX1fBmC4BUjSboF9dHgfnqPqj8WAc4",
+      "label": "🧰 aaaw"
+    },
+    {
+      "address": "GH9yk8vgFvHnAD8JZqXxr3hBN1Lr1mJ9NPzrP5mVqiJe",
+      "label": "🧰 Denza"
+    },
+    {
+      "address": "BxMLRRVA1gbkTKKGt5hXLFBjUhETgkunvKkfAPEDtPnZ",
+      "label": "🧰 POLYNATOR DEV"
+    },
+    {
+      "address": "CDKJ35ZD9jHivyEa3fMbxZSNrTERAS3CbrJbj4vP9f82",
+      "label": "🥕 Bronskee"
+    },
+    {
+      "address": "EuMTN2ibnSRWyrCV7GroQvKpvmp5TjDkkRuUoWSJZCGr",
+      "label": "🧇 Yugi side"
+    },
+    {
+      "address": "xyzfhxfy8NhfeNG3Um3WaUvFXzNuHkrhrZMD8dsStB6",
+      "label": "💜 Gasp"
+    },
+    {
+      "address": "6hHfDSagPQv4ouhr7x17jp9tQNfqUhdJWFHY5mEHnLp2",
+      "label": "👗 Looner"
+    },
+    {
+      "address": "GijFWw4oNyh9ko3FaZforNsi3jk6wDovARpkKahPD4o5",
+      "label": "👗 Looner"
+    },
+    {
+      "address": "6kiD2FuYrXJwB7AX19Ng3ogfEaRAUho4PbPxUwP4TLQk",
+      "label": "🧡 orange"
+    },
+    {
+      "address": "2X4H5Y9C4Fy6Pf3wpq8Q4gMvLcWvfrrwDv2bdR8AAwQv",
+      "label": "🧡 orange"
+    },
+    {
+      "address": "6GxT2FpgJ14Vm8NtgD3d9UMVPJEKVHorsrYN1VB4MsqH",
+      "label": "🧡 orange"
+    },
+    {
+      "address": "8uEbtW26wGe5VBiCWrifk4W8QxX8iPuuKazGkEwfTcpK",
+      "label": "💰 lmaogood"
+    },
+    {
+      "address": "FsYBwYi9rbcxBqY7KiCGfhCTkB8xPEXqoVzi4xqjjw6C",
+      "label": "🫒 yolo"
+    },
+    {
+      "address": "8dwubKnL4FmmZsFt9cobpneFWH5azwRqDvciT2vsuQxS",
+      "label": "🫒 yolo"
+    },
+    {
+      "address": "8FjipgAr2qxD7hVVkidEmTodNa1pCv1eMEFHk7TbJmED",
+      "label": "🫒 yolo"
+    },
+    {
+      "address": "6SYhd67FqypKyNqd5iFikRhrmKAKcCwwurSYUAMNSH4r",
+      "label": "🐲 Dragon new"
+    },
+    {
+      "address": "3t57E5DkEYVahjqSUjS9uDw5kzfhw85FZk7tLzm1jhnJ",
+      "label": "❤️‍🔥 Flames new"
+    },
+    {
+      "address": "CAPn1yH4oSywsxGU456jfgTrSSUidf9jgeAnHceNUJdw",
+      "label": "👽 Caps"
+    },
+    {
+      "address": "7AQH8mYnjWAmqJGYTHUmdcUqxsdphJqo84eD1Hbcxu8Z",
+      "label": "💰 good2"
+    },
+    {
+      "address": "BZmxuXQ68QeZABbDFSzveHyrXCv5EG6Ut1ATw5qZgm2Q",
+      "label": "💰 good"
+    },
+    {
+      "address": "GwbgS6C5F2fhm9uSb9G79QAyUi3ApLAyftoo4KkACqkZ",
+      "label": "🧰 Aspect Dev new"
+    },
+    {
+      "address": "BoBo2S28s9E2gE2qMJPSMFUvdptpBCXaRhLg6UYR8teE",
+      "label": "🥷 god bundle"
+    },
+    {
+      "address": "DN9AiZxa3zhxsphoxTpTR7wkXns3LpVq1mqrs1KMtsmX",
+      "label": "❤ Flames new"
+    },
+    {
+      "address": "FxN3VZ4BosL5urG2yoeQ156JSdmavm9K5fdLxjkPmaMR",
+      "label": "🐷 Cupseyside"
+    },
+    {
+      "address": "6gAgy3F1tLxeBWb8UhGEnmXYVRoaz3w1Lzv6APyhfoHk",
+      "label": "🐝 Henn100x"
+    },
+    {
+      "address": "6xX7LudE5AqnTUc8dJJfzuarkSc6WMw7qRHgQXUdWauJ",
+      "label": "🥷 Weirdcoin quant"
+    },
+    {
+      "address": "DdLaSTncTxfsfHkVwvKkHYLhhEePo3gUFzTn7e87Uw9e",
+      "label": "🌞 Esk"
+    },
+    {
+      "address": "oACNLDVNoMoaPzNbSNAZ1uzUF8FhBF2xgtd7uDohgjN",
+      "label": "🥷 Bonkcrime"
+    },
+    {
+      "address": "fCbc2do6QcQHHMDcMP7eQbdB6r8HCwXJoJkJQmgHoz3",
+      "label": "🙈 Monki new"
+    },
+    {
+      "address": "AcULspHXYRmoKkUhKN2WmFo4f8USUkmJtAE1LE2twJ2E",
+      "label": "🥶 Bot"
+    },
+    {
+      "address": "Dcomk8K3DqZgtL4EQx1bAuXpTYZPms2mfzwAjTT73ret",
+      "label": "🥷 jsol"
+    },
+    {
+      "address": "6a7tZxBST4vbKCD4EGtKNoiRW3bJgcLBg7kiQo2PvGyG",
+      "label": "🧰 Luce Dev"
+    },
+    {
+      "address": "1337ziTYCZfTi9AhJxxoVuN1NtWSHmu88eD9j1uz8pfX",
+      "label": "🖤 Boogie new"
+    },
+    {
+      "address": "7GLjyph9WbChvSxE9wR5t1kT2V5zc38w2hRAkhFTMWq6",
+      "label": "🧰 Gladey"
+    },
+    {
+      "address": "dATMod1UTXYzvaXji4mBsvXTeAUAC73TNJQAejKS54X",
+      "label": "🤑 Amtad revive"
+    },
+    {
+      "address": "DjM7Tu7whh6P3pGVBfDzwXAx2zaw51GJWrJE3PwtuN7s",
+      "label": "🧰 dev chillhouse"
+    },
+    {
+      "address": "Gake1z6f5jN4EkeWCqhC1BPCc1FrsstpbYB5SJcV4aEm",
+      "label": "🧸 Theonomix 2"
+    },
+    {
+      "address": "EV3iQYHhABg2NPjUoaKBj48YzrKzbNS5dxzS3KDDMx7V",
+      "label": "🐺 Oscar new"
+    },
+    {
+      "address": "2JarGaaVhqcV2FbsxQPLagFpPi4qh3SuKt7adYk299hr",
+      "label": "💋 AAaw"
+    },
+    {
+      "address": "7tvuE6B9F7MGzQkXdvjvU5npNL8hQJ4B6PYdWwuAKfbo",
+      "label": "🀄 Rayan"
+    },
+    {
+      "address": "FUahwafcrQAmYKbtbj64QHBxdkZXhtitgxhNVv7wFkgf",
+      "label": "👶 Ethancooks"
+    },
+    {
+      "address": "AXniGcG58UQfjWwm4qMtLHqJ3uQqbSTuWUHBmjbJx6Na",
+      "label": "🧰 Noir dev"
+    },
+    {
+      "address": "5qWya6UjwWnGVhdSBL3hyZ7B45jbk6Byt1hwd7ohEGXE",
+      "label": "💰 believe quant"
+    },
+    {
+      "address": "6onMjUbuaAGc2LAuhiompaf9wD6WXqSYUjt3DfKa2HPB",
+      "label": "🧰 money laundering dev"
+    },
+    {
+      "address": "Eq7vHwMDow22B8kJKEzYp478VpcYudfgvdvygeE1Q2Ys",
+      "label": "🧰 chi dev"
+    },
+    {
+      "address": "8owrEPotpZzxiqkUmpkesycftrRm1gGAKt8RSdKgtoTv",
+      "label": "🧰 witloff new"
+    },
+    {
+      "address": "3wuHfZtivpVS4WtKfVSuB3dDGZ8W29aDytudLGEMn1Jx",
+      "label": "👻 bonk fart dev"
+    },
+    {
+      "address": "HQLeWLJRfhnzq4Ucdn3V1vgSw5ZLxRXT6QQa5bASXSdu",
+      "label": "🦁 Mark new"
+    },
+    {
+      "address": "5skKDVJ77jhEa1YELXuARCdMLTupVSt83c6VxAYbYqpg",
+      "label": "💰 cabalguy"
+    },
+    {
+      "address": "DApCMEwENHwb8LHKCbFFHwWHM3QFbPe9YvpN82Qj6YFs",
+      "label": "🏇 west 5"
+    },
+    {
+      "address": "CzhpWb4CqhTA4MuATiCqeHZUWKPLY2HZkmerGj48WpEM",
+      "label": "🦓 waddles 2"
+    },
+    {
+      "address": "9GTVJLduxXwUR6otWSYgDLatYJCab61wHB8Vcoi2FNEf",
+      "label": "🦓 waddles 3"
+    },
+    {
+      "address": "6DtEedWf9Wk5hA7Xth82Eq441yf5DA4aGLqaQAVfDokm",
+      "label": "💰 A1LON"
+    },
+    {
+      "address": "FtGWiQYZR8h1yVoSApwY2JPVrWXc7BJyvyiS3Xr1yZ7C",
+      "label": "🐞 HydroTrades"
+    },
+    {
+      "address": "mercyjp6vpa75nLGdz2jsTSp1qd9DiUQbMfT3i2QP8v",
+      "label": "🧸 Theonomix"
+    },
+    {
+      "address": "CtPxvpWo1pk7HtL6KwpCLMMdsXHC6fdqAN1bPiracaQq",
+      "label": "💴 fartcoin dev2"
+    },
+    {
+      "address": "gasTzr94Pmp4Gf8vknQnqxeYxdgwFjbgdJa4msYRpnB",
+      "label": "🚭 gas"
+    },
+    {
+      "address": "xXpRSpAe1ajq4tJP78tS3X1AqNwJVQ4Vvb1Swg4hHQh",
+      "label": "🐆 ALOHquant"
+    },
+    {
+      "address": "217eqTqtPzHUm4gwW7Yj26dCdb6VPJ3ATPXD7sQvtitT",
+      "label": "💰 Marcell"
+    },
+    {
+      "address": "6nnBeK1mLgdrBZFfXYKmGkuDHYTrBZZ18YEQfNUih9nm",
+      "label": "🦢 Mark"
+    },
+    {
+      "address": "9PNrgpgVcMJhpEUA37ZLqGbttMYzXGnZX2s3AzZUYk4c",
+      "label": "🎃 Jack"
+    },
+    {
+      "address": "6gZ9rBQSMJdvDsQziNBkao9kjVmPz4xwFJHqggztS4Sp",
+      "label": "⚽ trax"
+    },
+    {
+      "address": "9ru9BSVFSUqSRQFwdjjnkzQGf9yUdpRTjpjXPKc4BvxX",
+      "label": "🙀 ferb2"
+    },
+    {
+      "address": "M6vNLX9SFphEqbpaG3EF6iF8qxLPB5VxZG8WDaV9RkQ",
+      "label": "👻 whale"
+    },
+    {
+      "address": "GtRL3uSeFgJx8Xe7FtCcoU2xzC5E1CAgb77njgQhvjBL",
+      "label": "🐳 VERY GOOD WALLET"
+    },
+    {
+      "address": "2YJbcB9G8wePrpVBcT31o8JEed6L3abgyCjt5qkJMymV",
+      "label": "🍉 Al4n"
+    },
+    {
+      "address": "2kv8X2a9bxnBM8NKLc6BBTX2z13GFNRL4oRotMUJRva9",
+      "label": "👻 4gh0stee"
+    },
+    {
+      "address": "2itf6FWdZUqUb3fKUFPGnaTgqjjvWZwzrz129LCaqFa2",
+      "label": "🟩 Weaver AI QUANT"
+    },
+    {
+      "address": "2CXbN6nuTTb4vCrtYM89SfQHMMKGPAW4mvFe6Ht4Yo6z",
+      "label": "💳️ MoneyMaykah"
+    },
+    {
+      "address": "215nhcAHjQQGgwpQSJQ7zR26etbjjtVdW74NLzwEgQjP",
+      "label": "⌚ AP / Ogant"
+    },
+    {
+      "address": "3BLjRcxWGtR7WRshJ3hL25U3RjWr5Ud98wMcczQqk4Ei",
+      "label": "🧭 Pablo"
+    },
+    {
+      "address": "bozo8DPprqrU6N3y5cUDMDBCA61wGrk7qfy24Wm5rLB",
+      "label": "🌴 Floppa"
+    },
+    {
+      "address": "6vRxHRAn7SctDHj1GFJWrmSLn4icsi6KGn8PhTMswtzr",
+      "label": "🐎 west4"
+    },
+    {
+      "address": "A4DCAjDwkq5jYhNoZ5Xn2NbkTLimARkerVv81w2dhXgL",
+      "label": "🐳 Kayoti / Rat"
+    },
+    {
+      "address": "AFf2m58fLB5JGpZqcWT5FY3Gw3YckAAYXWob8puTt1pt",
+      "label": "💰 meteora quant"
+    },
+    {
+      "address": "HdxkiXqeN6qpK2YbG51W23QSWj3Yygc1eEk2zwmKJExp",
+      "label": "🐋 Chinese quant"
+    },
+    {
+      "address": "3JoVBiQEA2QKsq7TzW5ez5jVRtbbYgTNijoZzp5qgkr2",
+      "label": "🦄 Frank"
+    },
+    {
+      "address": "EwTNPYTuwxMzrvL19nzBsSLXdAoEmVBKkisN87csKgtt",
+      "label": "💰 Gake alt"
+    },
+    {
+      "address": "H68thDmYazXf1YqRhyaY3N1oA8xAPcaaeT2hJLGcgohQ",
+      "label": "💰 soloxbt"
+    },
+    {
+      "address": "Du1VZiTFX7yBwius4ZvhZRg69KeVnQwRbPvxY1mRuTE1",
+      "label": "💰 solxbt"
+    },
+    {
+      "address": "39q2g5tTQn9n7KnuapzwS2smSx3NGYqBoea11tBjsGEt",
+      "label": "🥷 Crimequant"
+    },
+    {
+      "address": "77Zw9Y9uPqzLExaFXUxoBpdXVc9qSTexqZQFqNbNiYvE",
+      "label": "👻 Moi dev"
+    },
+    {
+      "address": "5TuiERc4X7EgZTxNmj8PHgzUAfNHZRLYHKp4DuiWevXv",
+      "label": "🎄 Rev"
+    },
+    {
+      "address": "DHECPstf8wVjeR7NXkcvrnJHvHCRfNo7FmRP3QeGf6XL",
+      "label": "🌒 DARK AXIOM"
+    },
+    {
+      "address": "JEETj9KvH3mm14NCUdrgZSZJf8U2rAbUa9gc6ADhA3of",
+      "label": "💛 GASP"
+    },
+    {
+      "address": "HBAbw8VjQjCpE9hgBziwrGNoMsNKxH9WFvfBfVaP8C8L",
+      "label": "🐐 GOAT"
+    },
+    {
+      "address": "BcYqLiLsiSPf17fk3GnXPRF9X8o3sqK6r67MpnjVyPsg",
+      "label": "💋 leens"
+    },
+    {
+      "address": "FRDcU32jfiuo7bTM7e2SHtZnx6fSrLTS19iGScfCamPU",
+      "label": "🌶️ LaterBomb2"
+    },
+    {
+      "address": "3NzhtFBULFCyvXTboAcFg6G5b9oS92cSfGtMSbhcWNCu",
+      "label": "💝 emma"
+    },
+    {
+      "address": "a16ZRRPYzkCgED9ECcFd9vdrFzW775Z2DqmAEsSZDGE",
+      "label": "🥝 ethan"
+    },
+    {
+      "address": "GvD5HiZuNcZvny8zhUXStLwEiWmA2spbikj22wEN5LYR",
+      "label": "🍪 kreo"
+    },
+    {
+      "address": "HNyzPTo35sqxrwt98YV6N1SnhV29Sbm6rv2Xyfg7Rn9V",
+      "label": "💚 weaver"
+    },
+    {
+      "address": "8CZy7M3Z8ARMgvFG3KMKHa8MamPPKpstNnEknfexKpa5",
+      "label": "💚 weaver"
+    },
+    {
+      "address": "GtRL3uSeFgJx8Xe7FtCcoU2xzC5E1CAgb77njgQhvjBL",
+      "label": "🐳 VERY GOOD WALLET"
+    },
+    {
+      "address": "GWSMk4xghjr3nDjPpNLYkzLQ51AZPdjCJokk7qw96VrN",
+      "label": "🍪 kreo"
+    },
+    {
+      "address": "8paFUVAz3dvSXJs3v9cgZXpLC1cooZBdE8aDwAnrFeRF",
+      "label": "🐪 qtdegen"
+    },
+    {
+      "address": "GipUqsbqDCr4pkYi6UQASzRD92zJGFaJgw9jjCayYmcd",
+      "label": "🐠 floppa"
+    },
+    {
+      "address": "DJ44GHbZV5PxQv6rcFYZjcnipHuX8xAAx91EexkCXN8K",
+      "label": "♣️ bandit"
+    },
+    {
+      "address": "BaLCEtq6qgPFruxfnjWBJBkWwCXdwmuodn4NUicQqMSw",
+      "label": "🐷 cupsey"
+    },
+    {
+      "address": "EUNCKUnYfNVcLApQNQYL4dyK5DdekQyBe2DKKzaD6yYn",
+      "label": "🔴 red"
+    },
+    {
+      "address": "ANCL5czRGMLAacLCiRe1qnpoBYvZaXDbTDFWA3X2yK5q",
+      "label": "🔴 red"
+    },
+    {
+      "address": "FwBQTS1Z5FAZMbp3aUjSChLPjvWLmwDS6zKxDVg8nJR1",
+      "label": "👓 leens"
+    },
+    {
+      "address": "AXv7RZwZ3YVmWAKaiTxJJ1ELyehyFUVQ8WDXca1fMnKT",
+      "label": "⏳ dust"
+    },
+    {
+      "address": "sAdNbe1cKNMDqDsa4npB3TfL62T14uAo2MsUQfLvzLT",
+      "label": "🥝 ethan"
+    },
+    {
+      "address": "89HbgWduLwoxcofWpmn1EiF9wEdpgkNDEyPjzZ72mkDi",
+      "label": "🆕 Nouveau Wallet"
+    }
+  ],
+  "user_wallets": {},
+  "demo_portfolio": {},
+  "demo_trades": []
+}
