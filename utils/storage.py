@@ -5,10 +5,11 @@ logger = logging.getLogger(__name__)
 
 DEFAULT = {
     "chat_ids": [],
-    "tracked_wallets": [],
+    "dev_wallets": [],
     "user_wallets": {},
     "demo_portfolio": {},
     "demo_trades": [],
+    "seen_dev_tokens": {},
 }
 
 class Storage:
@@ -37,20 +38,20 @@ class Storage:
             d["chat_ids"].append(str(cid))
             self._save(d)
 
-    def get_wallets(self): return self._load()["tracked_wallets"]
-    def add_wallet(self, address, label=""):
+    def get_dev_wallets(self): return self._load()["dev_wallets"]
+    def add_dev_wallet(self, address, label=""):
         d = self._load()
-        if any(w["address"] == address for w in d["tracked_wallets"]):
+        if any(w["address"] == address for w in d["dev_wallets"]):
             return False
-        d["tracked_wallets"].append({"address": address, "label": label or address[:8]})
+        d["dev_wallets"].append({"address": address, "label": label or address[:8]})
         self._save(d)
         return True
-    def remove_wallet(self, address):
+    def remove_dev_wallet(self, address):
         d = self._load()
-        before = len(d["tracked_wallets"])
-        d["tracked_wallets"] = [w for w in d["tracked_wallets"] if w["address"] != address]
+        before = len(d["dev_wallets"])
+        d["dev_wallets"] = [w for w in d["dev_wallets"] if w["address"] != address]
         self._save(d)
-        return len(d["tracked_wallets"]) < before
+        return len(d["dev_wallets"]) < before
 
     def get_user_wallet(self, chat_id): return self._load()["user_wallets"].get(str(chat_id), "")
     def set_user_wallet(self, chat_id, address):
