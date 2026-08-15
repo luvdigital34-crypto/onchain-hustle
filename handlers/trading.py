@@ -24,7 +24,6 @@ def buy_sell_keyboard(mint, name=""):
          InlineKeyboardButton("🔴 Sell 100%", callback_data=f"sell|{mint}|100")],
         [InlineKeyboardButton("📊 Chart", url=f"https://dexscreener.com/solana/{mint}"),
          InlineKeyboardButton("⚡ Terminal", url=f"https://axiom.trade/meme/{mint}")],
-    ]) 
     ])
 
 def alert_keyboard(mint):
@@ -80,14 +79,14 @@ async def trade_buttons(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
         return
 
     jup_url = f"https://jup.ag/swap/{'SOL-'+mint if action=='buy' else mint+'-SOL'}"
-    gmgn_url = f"https://gmgn.ai/sol/token/{mint}"
+    axiom_url = f"https://axiom.trade/meme/{mint}"
     emoji = "🟢 Achat" if action == "buy" else "🔴 Vente"
 
     await query.edit_message_text(
         f"{emoji} *{pct}%* demandé !\n\n"
         f"⚡ Exécute sur :\n"
         f"🔗 [Jupiter — Meilleur prix]({jup_url})\n"
-        f"🔗 [GMGN Terminal]({gmgn_url})\n\n"
+        f"🔗 [Axiom Terminal]({axiom_url})\n\n"
         f"_Connecte ton wallet Phantom_",
         parse_mode="Markdown", disable_web_page_preview=False
     )
