@@ -23,7 +23,8 @@ def buy_sell_keyboard(mint, name=""):
         [InlineKeyboardButton("🔴 Sell 70%", callback_data=f"sell|{mint}|70"),
          InlineKeyboardButton("🔴 Sell 100%", callback_data=f"sell|{mint}|100")],
         [InlineKeyboardButton("📊 Chart", url=f"https://dexscreener.com/solana/{mint}"),
-         InlineKeyboardButton("⚡ Terminal", url=f"https://gmgn.ai/sol/token/{mint}")],
+         InlineKeyboardButton("⚡ Terminal", url=f"https://axiom.trade/meme/{mint}")],
+    ]) 
     ])
 
 def alert_keyboard(mint):
@@ -31,7 +32,7 @@ def alert_keyboard(mint):
         [InlineKeyboardButton("✅ Acheter !", callback_data=f"buy|{mint}|10"),
          InlineKeyboardButton("❌ Passer", callback_data=f"skip|{mint}|0")],
         [InlineKeyboardButton("📊 Chart", url=f"https://dexscreener.com/solana/{mint}"),
-         InlineKeyboardButton("⚡ Terminal", url=f"https://gmgn.ai/sol/token/{mint}")],
+         InlineKeyboardButton("⚡ Terminal", url=f"https://axiom.trade/meme/{mint}")],
     ])
 
 async def buy_cmd(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
