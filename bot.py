@@ -6,13 +6,12 @@ from http.server import HTTPServer, BaseHTTPRequestHandler
 from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandler, MessageHandler, filters
 from handlers.commands import (
     start, help_cmd, status_cmd,
-    add_wallet_tracker, list_wallets, remove_wallet,
+    add_dev_wallet, list_dev_wallets, remove_dev_wallet,
     set_my_wallet, my_balance
 )
 from handlers.trading import buy_cmd, sell_cmd, trade_buttons
 from handlers.token_creator import create_token_cmd, handle_token_image
 from handlers.demo_trading import demo_start_cmd, demo_status_cmd, demo_stop_cmd
-from scrapers.wallet_tracker import WalletTracker
 from scrapers.dev_tracker import DevTracker
 from scrapers.trend_hunter import TrendHunter
 from utils.storage import Storage
@@ -49,9 +48,9 @@ async def run_bot():
     app.add_handler(CommandHandler("start",         start))
     app.add_handler(CommandHandler("help",          help_cmd))
     app.add_handler(CommandHandler("status",        status_cmd))
-    app.add_handler(CommandHandler("track",         add_wallet_tracker))
-    app.add_handler(CommandHandler("wallets",       list_wallets))
-    app.add_handler(CommandHandler("untrack",       remove_wallet))
+    app.add_handler(CommandHandler("trackdev",      add_dev_wallet))
+    app.add_handler(CommandHandler("devs",          list_dev_wallets))
+    app.add_handler(CommandHandler("untrackdev",    remove_dev_wallet))
     app.add_handler(CommandHandler("wallet",        set_my_wallet))
     app.add_handler(CommandHandler("balance",       my_balance))
     app.add_handler(CommandHandler("buy",           buy_cmd))
@@ -63,15 +62,14 @@ async def run_bot():
     app.add_handler(CallbackQueryHandler(trade_buttons))
     app.add_handler(MessageHandler(filters.PHOTO, handle_token_image))
 
-    wallets = WalletTracker(config, storage, app.bot)
-    devs    = DevTracker(config, storage, app.bot)
-    trends  = TrendHunter(config, storage, app.bot)
+    devs   = DevTracker(config, storage, app.bot)
+    trends = TrendHunter(config, storage, app.bot)
 
     async with app:
         await app.start()
         await app.updater.start_polling(drop_pending_updates=True)
         logger.info("🔫 OnChainHunter démarré !")
-        await asyncio.gather(wallets.run(), devs.run(), trends.run())
+        await asyncio.gather(devs.run(), trends.run())
 
 
 if __name__ == "__main__":
