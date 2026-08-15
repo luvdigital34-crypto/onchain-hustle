@@ -14,15 +14,15 @@ async def start(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
         "🔫 *OnChainHunter* — Bienvenue !\n\n"
         "━━━━━━━━━━━━━━━━━━━━\n"
-        "👀 *WALLET TRACKER*\n"
-        "`/track ADRESSE NOM` — Tracker un wallet\n"
-        "`/wallets` — Voir les wallets trackés\n"
-        "`/untrack ADRESSE` — Arrêter le tracking\n\n"
+        "🛠️ *DEV TRACKER*\n"
+        "`/trackdev ADRESSE NOM` — Tracker un dev\n"
+        "`/devs` — Voir les devs trackés\n"
+        "`/untrackdev ADRESSE` — Arrêter le tracking\n\n"
         "💰 *MON WALLET*\n"
         "`/wallet ADRESSE` — Connecter mon wallet\n"
         "`/balance` — Voir mon solde\n\n"
         "📊 *TRADING*\n"
-        "`/buy TOKEN MONTANT` — Acheter un token\n"
+        "`/buy TOKEN` — Acheter un token\n"
         "`/sell TOKEN` — Vendre un token\n\n"
         "🪙 *CRÉER UN TOKEN*\n"
         "`/create` — Créer depuis une image\n\n"
@@ -32,8 +32,8 @@ async def start(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
         "`/demo_stop` — Arrêter le démo\n\n"
         "━━━━━━━━━━━━━━━━━━━━\n"
         "🔔 *Alertes auto :*\n"
-        "• Trades des wallets trackés\n"
-        "• Nouveaux tokens deployés\n"
+        "• Quand un dev tracké déploie un token\n"
+        "• Quand l'IA repère elle-même un bon dev sur pump.fun\n"
         "• Tendances détectées par l'IA",
         parse_mode="Markdown"
     )
@@ -42,60 +42,60 @@ async def help_cmd(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
         "📖 *Guide rapide*\n\n"
         "1️⃣ `/wallet TON_ADRESSE` — Connecte ton wallet\n"
-        "2️⃣ `/track ADRESSE Nom` — Tracker un whale/dev\n"
+        "2️⃣ `/trackdev ADRESSE Nom` — Tracker un dev\n"
         "3️⃣ `/demo` — Lance l'IA en mode démo\n"
         "4️⃣ `/create` — Envoie une image → génère un token\n\n"
-        "💡 Les alertes incluent nom du token + boutons Buy/Sell !",
+        "💡 L'IA scanne aussi pump.fun toute seule et t'alerte quand elle repère un bon dev !",
         parse_mode="Markdown"
     )
 
 async def status_cmd(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
-    wallets = storage.get_wallets()
+    devs = storage.get_dev_wallets()
     chats = storage.get_chat_ids()
     await update.message.reply_text(
         f"⚡ *Statut — OnChainHunter 🔫*\n\n"
-        f"👀 Wallets : {'🟢 ' + str(len(wallets)) + ' trackés' if wallets else '🔴 Aucun'}\n"
+        f"🛠️ Devs trackés : {'🟢 ' + str(len(devs)) if devs else '🔴 Aucun'}\n"
         f"👥 Abonnés : {len(chats)}\n"
         f"🤖 IA Démo : 🟢 Active\n"
         f"📡 Pump.fun : 🟢 Scan actif",
         parse_mode="Markdown"
     )
 
-async def add_wallet_tracker(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
+async def add_dev_wallet(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
     if not ctx.args:
-        await update.message.reply_text("❌ Usage : `/track ADRESSE NOM`", parse_mode="Markdown")
+        await update.message.reply_text("❌ Usage : `/trackdev ADRESSE NOM`", parse_mode="Markdown")
         return
     address = ctx.args[0].strip()
     label = " ".join(ctx.args[1:]) if len(ctx.args) > 1 else ""
-    if storage.add_wallet(address, label):
+    if storage.add_dev_wallet(address, label):
         await update.message.reply_text(
-            f"✅ Wallet *{label or address[:8]}* ajouté !\n"
-            f"🔔 Alerte à chaque trade avec boutons Buy/Sell.",
+            f"✅ Dev *{label or address[:8]}* ajouté !\n"
+            f"🔔 Alerte dès qu'il déploie un nouveau token.",
             parse_mode="Markdown"
         )
     else:
-        await update.message.reply_text("⚠️ Ce wallet est déjà tracké.")
+        await update.message.reply_text("⚠️ Ce dev est déjà tracké.")
 
-async def list_wallets(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
-    wallets = storage.get_wallets()
-    if not wallets:
-        await update.message.reply_text("_(Aucun wallet tracké)_\n\nUtilise `/track ADRESSE NOM`", parse_mode="Markdown")
+async def list_dev_wallets(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
+    devs = storage.get_dev_wallets()
+    if not devs:
+        await update.message.reply_text("_(Aucun dev tracké)_\n\nUtilise `/trackdev ADRESSE NOM`", parse_mode="Markdown")
         return
-    msg = f"👀 *{len(wallets)} Wallets trackés :*\n━━━━━━━━━━━━━━━━━━━━\n"
-    for w in wallets[:50]:
+    msg = f"🛠️ *{len(devs)} Devs trackés :*\n━━━━━━━━━━━━━━━━━━━━\n"
+    for w in devs[:50]:
         msg += f"• *{w.get('label','')}* `{w['address'][:8]}...`\n"
-    if len(wallets) > 50:
-        msg += f"\n_... et {len(wallets)-50} autres_"
+    if len(devs) > 50:
+        msg += f"\n_... et {len(devs)-50} autres_"
     await update.message.reply_text(msg, parse_mode="Markdown")
 
-async def remove_wallet(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
+async def remove_dev_wallet(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
     if not ctx.args:
-        await update.message.reply_text("❌ Usage : `/untrack ADRESSE`", parse_mode="Markdown")
+        await update.message.reply_text("❌ Usage : `/untrackdev ADRESSE`", parse_mode="Markdown")
         return
-    if storage.remove_wallet(ctx.args[0].strip()):
-        await update.message.reply_text("🗑️ Wallet retiré.", parse_mode="Markdown")
+    if storage.remove_dev_wallet(ctx.args[0].strip()):
+        await update.message.reply_text("🗑️ Dev retiré.", parse_mode="Markdown")
     else:
-        await update.message.reply_text("⚠️ Wallet introuvable.")
+        await update.message.reply_text("⚠️ Dev introuvable.")
 
 async def set_my_wallet(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
     chat_id = str(update.effective_chat.id)
