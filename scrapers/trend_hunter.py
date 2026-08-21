@@ -9,6 +9,8 @@ from config import Config
 
 logger = logging.getLogger(__name__)
 
+REDDIT_SUBS = ["CryptoMoonShots", "solana", "SolanaMemeCoins", "CryptoCurrency"]
+
 class TrendHunter:
     def __init__(self, config: Config, storage: Storage, bot: Bot):
         self.config = config
@@ -24,6 +26,7 @@ class TrendHunter:
                 await asyncio.gather(
                     self._scan_google_trends(),
                     self._scan_crypto_news(),
+                    self._scan_reddit(),
                 )
             except Exception as e:
                 logger.error(f"Trend hunter error: {e}")
@@ -63,6 +66,36 @@ class TrendHunter:
                         await self._notify(title, "Crypto News 📰", analysis)
         except Exception as e:
             logger.error(f"Crypto news error: {e}")
+
+    async def _scan_reddit(self):
+        for sub in REDDIT_SUBS:
+            try:
+                async with httpx.AsyncClient(timeout=15) as c:
+                    r = await c.get(
+                        f"https://www.reddit.com/r/{sub}/hot.json",
+                        params={"limit": 10},
+                        headers={"User-Agent": "OnChainHunterBot/1.0"}
+                    )
+                    if r.status_code != 200:
+                        continue
+                    posts = r.json().get("data", {}).get("children", [])
+                    for p in posts:
+                        data = p.get("data", {})
+                        title = data.get("title", "")
+                        score = data.get("score", 0)
+                        if not title or score < 50:
+                            continue
+                        tid = f"reddit_{title[:30]}"
+                        if tid in self.seen:
+                            continue
+                        analysis = await self.groq.analyze_trend(
+                            f"{title} (👍{score} sur r/{sub})", f"Reddit r/{sub}"
+                        )
+                        if analysis.get("score", 0) >= 7:
+                            self.seen.add(tid)
+                            await self._notify(title, f"Reddit r/{sub} 👽", analysis)
+            except Exception as e:
+                logger.error(f"Reddit scan error ({sub}): {e}")
 
     async def _notify(self, content, source, analysis):
         score = analysis.get("score", 5)
