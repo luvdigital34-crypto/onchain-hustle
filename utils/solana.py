@@ -58,3 +58,31 @@ async def get_new_tokens_pump(limit=20):
     except Exception as e:
         logger.error(f"New tokens error: {e}")
         return []
+
+async def get_top_holder_pct(mint, helius_rpc):
+    """Retourne le % de la supply totale détenu par le plus gros wallet (souvent le dev)."""
+    try:
+        async with httpx.AsyncClient(timeout=10) as c:
+            r = await c.post(helius_rpc, json={
+                "jsonrpc": "2.0", "id": 1,
+                "method": "getTokenLargestAccounts",
+                "params": [mint]
+            })
+            data = r.json().get("result", {}).get("value", [])
+            if not data:
+                return 0.0
+
+            supply_r = await c.post(helius_rpc, json={
+                "jsonrpc": "2.0", "id": 1,
+                "method": "getTokenSupply",
+                "params": [mint]
+            })
+            supply = float(supply_r.json().get("result", {}).get("value", {}).get("uiAmount", 0) or 0)
+            if supply <= 0:
+                return 0.0
+
+            top_amount = float(data[0].get("uiAmount", 0) or 0)
+            return round((top_amount / supply) * 100, 1)
+    except Exception as e:
+        logger.error(f"get_top_holder_pct error: {e}")
+        return 0.0
