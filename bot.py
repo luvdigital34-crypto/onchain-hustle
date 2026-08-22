@@ -14,6 +14,7 @@ from handlers.token_creator import create_token_cmd, handle_token_image
 from handlers.demo_trading import demo_start_cmd, demo_status_cmd, demo_stop_cmd
 from scrapers.dev_tracker import DevTracker
 from scrapers.trend_hunter import TrendHunter
+from scrapers.position_monitor import PositionMonitor
 from utils.storage import Storage
 from config import Config
 
@@ -62,14 +63,15 @@ async def run_bot():
     app.add_handler(CallbackQueryHandler(trade_buttons))
     app.add_handler(MessageHandler(filters.PHOTO, handle_token_image))
 
-    devs   = DevTracker(config, storage, app.bot)
-    trends = TrendHunter(config, storage, app.bot)
+    devs     = DevTracker(config, storage, app.bot)
+    trends   = TrendHunter(config, storage, app.bot)
+    monitor  = PositionMonitor(config, storage, app.bot)
 
     async with app:
         await app.start()
         await app.updater.start_polling(drop_pending_updates=True)
         logger.info("🔫 OnChainHunter démarré !")
-        await asyncio.gather(devs.run(), trends.run())
+        await asyncio.gather(devs.run(), trends.run(), monitor.run())
 
 
 if __name__ == "__main__":
