@@ -9,7 +9,7 @@ DEFAULT = {
     "user_wallets": {},
     "demo_portfolio": {},
     "demo_trades": [],
-    "seen_dev_tokens": {},
+    "demo_positions": {},
 }
 
 class Storage:
@@ -60,14 +60,45 @@ class Storage:
         self._save(d)
 
     def get_demo_portfolio(self, chat_id):
-        return self._load()["demo_portfolio"].get(str(chat_id), {"sol": 10.0, "tokens": {}, "pnl": 0.0, "trades": 0})
+        return self._load()["demo_portfolio"].get(str(chat_id), {"sol": 10.0, "pnl": 0.0, "trades": 0})
     def save_demo_portfolio(self, chat_id, portfolio):
         d = self._load()
         d["demo_portfolio"][str(chat_id)] = portfolio
         self._save(d)
+
     def get_demo_trades(self): return self._load().get("demo_trades", [])
     def add_demo_trade(self, trade):
         d = self._load()
         d["demo_trades"].append(trade)
         d["demo_trades"] = d["demo_trades"][-100:]
         self._save(d)
+
+    # ---- Positions ouvertes (démo) ----
+    def get_open_positions(self, chat_id=None):
+        d = self._load()
+        positions = d.get("demo_positions", {})
+        if chat_id is not None:
+            return positions.get(str(chat_id), [])
+        return positions
+
+    def add_open_position(self, chat_id, position):
+        d = self._load()
+        positions = d.setdefault("demo_positions", {})
+        positions.setdefault(str(chat_id), []).append(position)
+        self._save(d)
+
+    def remove_open_position(self, chat_id, mint):
+        d = self._load()
+        positions = d.setdefault("demo_positions", {})
+        chat_positions = positions.get(str(chat_id), [])
+        positions[str(chat_id)] = [p for p in chat_positions if p.get("mint") != mint]
+        self._save(d)
+
+    def get_all_open_positions_flat(self):
+        """Retourne [(chat_id, position), ...] pour tous les utilisateurs."""
+        d = self._load()
+        result = []
+        for chat_id, positions in d.get("demo_positions", {}).items():
+            for p in positions:
+                result.append((chat_id, p))
+        return result
