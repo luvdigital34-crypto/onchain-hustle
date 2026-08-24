@@ -18,6 +18,7 @@ async def get_token_info(mint):
             pairs = r.json().get("pairs", [])
             if not pairs: return {}
             pair = sorted(pairs, key=lambda x: float(x.get("liquidity",{}).get("usd",0) or 0), reverse=True)[0]
+            txns_h1 = pair.get("txns", {}).get("h1", {})
             return {
                 "name":       pair.get("baseToken",{}).get("name","Unknown"),
                 "symbol":     pair.get("baseToken",{}).get("symbol",""),
@@ -27,6 +28,8 @@ async def get_token_info(mint):
                 "change_24h": float(pair.get("priceChange",{}).get("h24", 0) or 0),
                 "liquidity":  float(pair.get("liquidity",{}).get("usd", 0) or 0),
                 "dex_url":    pair.get("url",""),
+                "buys_h1":    int(txns_h1.get("buys", 0) or 0),
+                "sells_h1":   int(txns_h1.get("sells", 0) or 0),
             }
     except Exception as e:
         logger.error(f"Token info error: {e}")
@@ -60,7 +63,6 @@ async def get_new_tokens_pump(limit=20):
         return []
 
 async def get_top_holder_pct(mint, helius_rpc):
-    """Retourne le % de la supply totale détenu par le plus gros wallet (souvent le dev)."""
     try:
         async with httpx.AsyncClient(timeout=10) as c:
             r = await c.post(helius_rpc, json={
