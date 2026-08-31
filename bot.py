@@ -10,7 +10,7 @@ from handlers.commands import (
     set_my_wallet, my_balance
 )
 from handlers.trading import buy_cmd, sell_cmd, trade_buttons
-from handlers.token_creator import create_token_cmd, handle_token_image
+from handlers.token_creator import create_token_cmd, whois_cmd, handle_photo
 from handlers.demo_trading import demo_start_cmd, demo_status_cmd, demo_stop_cmd
 from scrapers.dev_tracker import DevTracker
 from scrapers.trend_hunter import TrendHunter
@@ -57,11 +57,12 @@ async def run_bot():
     app.add_handler(CommandHandler("buy",           buy_cmd))
     app.add_handler(CommandHandler("sell",          sell_cmd))
     app.add_handler(CommandHandler("create",        create_token_cmd))
+    app.add_handler(CommandHandler("whois",         whois_cmd))
     app.add_handler(CommandHandler("demo",          demo_start_cmd))
     app.add_handler(CommandHandler("demo_status",   demo_status_cmd))
     app.add_handler(CommandHandler("demo_stop",     demo_stop_cmd))
     app.add_handler(CallbackQueryHandler(trade_buttons))
-    app.add_handler(MessageHandler(filters.PHOTO, handle_token_image))
+    app.add_handler(MessageHandler(filters.PHOTO, handle_photo))
 
     devs     = DevTracker(config, storage, app.bot)
     trends   = TrendHunter(config, storage, app.bot)
