@@ -1,5 +1,6 @@
 import json, os, logging
 from pathlib import Path
+from datetime import date
 
 logger = logging.getLogger(__name__)
 
@@ -10,6 +11,9 @@ DEFAULT = {
     "demo_portfolio": {},
     "demo_trades": [],
     "demo_positions": {},
+    "daily_stats": {},
+    "signal_stats": {},
+    "dev_history": {},
 }
 
 class Storage:
@@ -70,10 +74,9 @@ class Storage:
     def add_demo_trade(self, trade):
         d = self._load()
         d["demo_trades"].append(trade)
-        d["demo_trades"] = d["demo_trades"][-100:]
+        d["demo_trades"] = d["demo_trades"][-200:]
         self._save(d)
 
-    # ---- Positions ouvertes (démo) ----
     def get_open_positions(self, chat_id=None):
         d = self._load()
         positions = d.get("demo_positions", {})
@@ -95,10 +98,69 @@ class Storage:
         self._save(d)
 
     def get_all_open_positions_flat(self):
-        """Retourne [(chat_id, position), ...] pour tous les utilisateurs."""
         d = self._load()
         result = []
         for chat_id, positions in d.get("demo_positions", {}).items():
             for p in positions:
                 result.append((chat_id, p))
         return result
+
+    def get_today_stats(self, chat_id):
+        today = str(date.today())
+        d = self._load()
+        chat_stats = d.get("daily_stats", {}).get(str(chat_id), {})
+        return chat_stats.get(today, {"pnl": 0.0, "tp": 0, "sl": 0, "wins": 0, "losses": 0})
+
+    def update_today_stats(self, chat_id, pnl_delta, is_tp=False, is_sl=False):
+        today = str(date.today())
+        d = self._load()
+        daily = d.setdefault("daily_stats", {})
+        chat_stats = daily.setdefault(str(chat_id), {})
+        today_stats = chat_stats.setdefault(today, {"pnl": 0.0, "tp": 0, "sl": 0, "wins": 0, "losses": 0})
+        today_stats["pnl"] += pnl_delta
+        if is_tp:
+            today_stats["tp"] += 1
+            today_stats["wins"] += 1
+        if is_sl:
+            today_stats["sl"] += 1
+            today_stats["losses"] += 1
+        self._save(d)
+        return today_stats
+
+    def get_signal_stats(self):
+        return self._load().get("signal_stats", {})
+
+    def record_signal_result(self, signal_names, won):
+        d = self._load()
+        stats = d.setdefault("signal_stats", {})
+        for name in signal_names:
+            s = stats.setdefault(name, {"wins": 0, "losses": 0})
+            if won:
+                s["wins"] += 1
+            else:
+                s["losses"] += 1
+        self._save(d)
+
+    def get_signal_weight_multiplier(self, signal_name):
+        stats = self.get_signal_stats().get(signal_name)
+        if not stats:
+            return 1.0
+        total = stats["wins"] + stats["losses"]
+        if total < 5:
+            return 1.0
+        win_rate = stats["wins"] / total
+        return round(max(0.5, min(1.5, 0.5 + win_rate)), 2)
+
+    def get_dev_history(self, address):
+        return self._load().get("dev_history", {}).get(address, {"launched": 0, "rugged": 0, "good": 0})
+
+    def record_dev_outcome(self, address, outcome):
+        d = self._load()
+        history = d.setdefault("dev_history", {})
+        entry = history.setdefault(address, {"launched": 0, "rugged": 0, "good": 0})
+        entry["launched"] += 1
+        if outcome == "rugged":
+            entry["rugged"] += 1
+        elif outcome == "good":
+            entry["good"] += 1
+        self._save(d)
