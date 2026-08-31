@@ -113,3 +113,15 @@ async def get_new_mint_from_signature(signature, helius_rpc):
     except Exception as e:
         logger.error(f"get_new_mint_from_signature error: {e}")
         return None
+async def get_pump_token_creator(mint):
+    """Récupère l'adresse du wallet créateur via l'API pump.fun."""
+    try:
+        async with httpx.AsyncClient(timeout=10) as c:
+            r = await c.get(f"https://frontend-api.pump.fun/coins/{mint}")
+            if r.status_code != 200:
+                return None
+            data = r.json()
+            return data.get("creator")
+    except Exception as e:
+        logger.error(f"get_pump_token_creator error: {e}")
+        return None
