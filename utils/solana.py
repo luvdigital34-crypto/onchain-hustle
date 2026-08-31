@@ -88,3 +88,28 @@ async def get_top_holder_pct(mint, helius_rpc):
     except Exception as e:
         logger.error(f"get_top_holder_pct error: {e}")
         return 0.0
+
+async def get_new_mint_from_signature(signature, helius_rpc):
+    """Récupère le mint d'un nouveau token à partir d'une signature de transaction (pour le listener temps réel)."""
+    try:
+        async with httpx.AsyncClient(timeout=10) as c:
+            r = await c.post(helius_rpc, json={
+                "jsonrpc": "2.0", "id": 1,
+                "method": "getTransaction",
+                "params": [signature, {"encoding": "jsonParsed", "maxSupportedTransactionVersion": 0}]
+            })
+            result = r.json().get("result")
+            if not result:
+                return None
+            meta = result.get("meta", {})
+            post_balances = meta.get("postTokenBalances", [])
+            pre_balances = meta.get("preTokenBalances", [])
+            pre_mints = {b.get("mint") for b in pre_balances}
+            for b in post_balances:
+                mint = b.get("mint")
+                if mint and mint not in pre_mints and mint.endswith("pump"):
+                    return mint
+            return None
+    except Exception as e:
+        logger.error(f"get_new_mint_from_signature error: {e}")
+        return None
