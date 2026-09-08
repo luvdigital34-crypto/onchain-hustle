@@ -68,12 +68,21 @@ async def run_bot():
     trends   = TrendHunter(config, storage, app.bot)
     monitor  = PositionMonitor(config, storage, app.bot)
 
+       async def safe_run(coro, name):
+        try:
+            await coro
+        except Exception as e:
+            logger.error(f"💥 {name} a planté et s'est arrêté : {e}")
+
     async with app:
         await app.start()
         await app.updater.start_polling(drop_pending_updates=True)
         logger.info("🔫 OnChainHunter démarré !")
-        await asyncio.gather(devs.run(), trends.run(), monitor.run())
-
+        await asyncio.gather(
+            safe_run(devs.run(), "DevTracker"),
+            safe_run(trends.run(), "TrendHunter"),
+            safe_run(monitor.run(), "PositionMonitor"),
+        )
 
 if __name__ == "__main__":
     t = threading.Thread(target=run_health_server, daemon=True)
