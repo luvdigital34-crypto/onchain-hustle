@@ -4,7 +4,7 @@ import logging
 import httpx
 from telegram import Bot, InlineKeyboardButton, InlineKeyboardMarkup
 from utils.storage import Storage
-from utils.solana import get_new_tokens_pump, get_token_info, get_top_holder_pct, get_pump_token_creator
+from utils.solana import get_new_tokens_pump, get_token_info, get_top_holder_pct, get_pump_token_creator, get_client
 from handlers.demo_trading import is_demo_active, execute_demo_trade, is_daily_trading_paused, get_required_score
 from scrapers.blockchain_listener import BlockchainListener
 from ai.groq_client import GroqClient
@@ -19,20 +19,25 @@ MIN_BUYS_H1 = 15
 SCORE_THRESHOLD = 50
 
 WATCH_DURATION_SEC = 600
-WATCHLIST_CHECK_INTERVAL_SEC = 15
+WATCHLIST_CHECK_INTERVAL_SEC = 30      # allégé (était 15s) pour ménager le CPU limité du plan gratuit
 NEW_TOKENS_SCAN_INTERVAL_SEC = 60
-DEV_CHECK_INTERVAL_SEC = 60
+DEV_CHECK_INTERVAL_SEC = 90
+MAX_WATCHED_TOKENS = 30                # plafond pour éviter une explosion de requêtes simultanées
+SCAN_LIMIT = 25                        # allégé (était 50)
+
+# Limite le nombre de requêtes réseau lancées EN MÊME TEMPS (évite de saturer le CPU 0.15 du plan gratuit)
+_semaphore = asyncio.Semaphore(4)
 
 
 async def get_tokens_created_by(address, limit=10):
     try:
-        async with httpx.AsyncClient(timeout=15) as c:
-            r = await c.get(f"https://frontend-api.pump.fun/coins/user-created-coins/{address}",
-                             params={"limit": limit, "offset": 0})
-            if r.status_code != 200:
-                return []
-            data = r.json()
-            return data if isinstance(data, list) else []
+        c = get_client()
+        r = await c.get(f"https://frontend-api.pump.fun/coins/user-created-coins/{address}",
+                         params={"limit": limit, "offset": 0})
+        if r.status_code != 200:
+            return []
+        data = r.json()
+        return data if isinstance(data, list) else []
     except Exception as e:
         logger.error(f"get_tokens_created_by error: {e}")
         return []
@@ -114,7 +119,7 @@ class DevTracker:
         self.listener = BlockchainListener(config, self._on_realtime_mint)
 
     async def run(self):
-        logger.info("🛠️ Dev tracker démarré (historique dev + poids adaptatifs + temps réel + limites quotidiennes)")
+        logger.info("🛠️ Dev tracker démarré (charge allégée pour plan gratuit)")
         await self._seed()
         await asyncio.gather(
             self._loop_tracked_devs(),
@@ -124,7 +129,7 @@ class DevTracker:
         )
 
     async def _seed(self):
-        tokens = await get_new_tokens_pump(50)
+        tokens = await get_new_tokens_pump(SCAN_LIMIT)
         for t in tokens:
             self.seen_global.add(t.get("tokenAddress", ""))
         for w in self.storage.get_dev_wallets():
@@ -134,8 +139,11 @@ class DevTracker:
     async def _on_realtime_mint(self, mint):
         if mint in self.seen_global or mint in self.watching:
             return
+        if len(self.watching) >= MAX_WATCHED_TOKENS:
+            return  # on ne surveille pas plus que le plafond, pour ménager les ressources
         self.seen_global.add(mint)
-        info = await get_token_info(mint)
+        async with _semaphore:
+            info = await get_token_info(mint)
         if not info:
             self.watching[mint] = {"first_mcap": 0, "started_at": time.time(), "checks": 0, "pending_mcap": True}
             return
@@ -155,7 +163,9 @@ class DevTracker:
         wallets = self.storage.get_dev_wallets()
         if not wallets:
             return
-        await asyncio.gather(*[self._check_dev_wallet(w) for w in wallets], return_exceptions=True)
+        for w in wallets:
+            async with _semaphore:
+                await self._check_dev_wallet(w)
 
     async def _check_dev_wallet(self, wallet):
         address = wallet["address"]
@@ -210,13 +220,18 @@ class DevTracker:
             await asyncio.sleep(NEW_TOKENS_SCAN_INTERVAL_SEC)
 
     async def _check_global_new_tokens(self):
-        tokens = await get_new_tokens_pump(50)
+        if len(self.watching) >= MAX_WATCHED_TOKENS:
+            return  # plafond atteint, on attend que des slots se libèrent
+        tokens = await get_new_tokens_pump(SCAN_LIMIT)
         for token in tokens:
+            if len(self.watching) >= MAX_WATCHED_TOKENS:
+                break
             mint = token.get("tokenAddress", "")
             if not mint or mint in self.seen_global:
                 continue
             self.seen_global.add(mint)
-            info = await get_token_info(mint)
+            async with _semaphore:
+                info = await get_token_info(mint)
             if not info:
                 continue
             mcap = float(info.get("market_cap", 0) or 0)
@@ -248,7 +263,8 @@ class DevTracker:
                 to_remove.append(mint)
                 continue
 
-            info = await get_token_info(mint)
+            async with _semaphore:
+                info = await get_token_info(mint)
             if not info:
                 continue
 
@@ -272,8 +288,9 @@ class DevTracker:
             if mint in self.alerted:
                 continue
 
-            dev_pct = await get_top_holder_pct(mint, self.config.HELIUS_RPC)
-            creator = await get_pump_token_creator(mint)
+            async with _semaphore:
+                dev_pct = await get_top_holder_pct(mint, self.config.HELIUS_RPC)
+                creator = await get_pump_token_creator(mint)
             dev_history = self.storage.get_dev_history(creator) if creator else None
 
             score, breakdown, signal_names = compute_signal_score(
@@ -331,10 +348,10 @@ class DevTracker:
                 if not is_demo_active(str(chat_id)):
                     continue
                 if is_daily_trading_paused(str(chat_id), self.storage, self.config):
-                    continue  # gain quotidien cible atteint, pas de nouveau trade
+                    continue
                 required = get_required_score(str(chat_id), self.storage, self.config, base_threshold=SCORE_THRESHOLD)
                 if score < required:
-                    continue  # pas assez fort vu la perte du jour, on devient plus sélectif
+                    continue
                 await execute_demo_trade(
                     bot=self.bot, chat_id=str(chat_id),
                     token_name=name, mint=mint,
