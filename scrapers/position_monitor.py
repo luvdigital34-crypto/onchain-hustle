@@ -8,6 +8,8 @@ from config import Config
 
 logger = logging.getLogger(__name__)
 
+_semaphore = asyncio.Semaphore(4)
+
 
 class PositionMonitor:
     def __init__(self, config: Config, storage: Storage, bot: Bot):
@@ -28,7 +30,9 @@ class PositionMonitor:
         flat = self.storage.get_all_open_positions_flat()
         if not flat:
             return
-        await asyncio.gather(*[self._check_position(chat_id, p) for chat_id, p in flat], return_exceptions=True)
+        for chat_id, p in flat:
+            async with _semaphore:
+                await self._check_position(chat_id, p)
 
     async def _check_position(self, chat_id, position):
         mint = position.get("mint")
